@@ -61,8 +61,27 @@ namespace VPilotRemoteControl
             Task.Run(async () =>
             {
                 _httpListener = new HttpListener();
-                _httpListener.Prefixes.Add($"http://localhost:{WebSocketPort}/");
-                _httpListener.Start();
+                _httpListener.Prefixes.Add($"http://+:{WebSocketPort}/");
+
+                try
+                {
+                    _httpListener.Start();
+                }
+                catch (HttpListenerException)
+                {
+                    // Binding to all interfaces (needed so LAN devices can reach this)
+                    // requires either admin privileges or a URL ACL reservation — the
+                    // installer sets one up automatically. Without it, HttpListener
+                    // throws here. Fall back to loopback-only so local testing on this
+                    // same PC still works, rather than failing to start entirely.
+                    _broker.PostDebugMessage(
+                        $"{Name}: couldn't bind to all interfaces — LAN devices won't be able to connect. " +
+                        $"Run as admin once, or run 'netsh http add urlacl url=http://+:{WebSocketPort}/ user=Everyone' " +
+                        "(see CONTRIBUTING.md). Falling back to localhost-only.");
+                    _httpListener = new HttpListener();
+                    _httpListener.Prefixes.Add($"http://localhost:{WebSocketPort}/");
+                    _httpListener.Start();
+                }
 
                 while (!_cts.IsCancellationRequested)
                 {

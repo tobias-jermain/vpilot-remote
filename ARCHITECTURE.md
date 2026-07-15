@@ -29,7 +29,7 @@ Plus an outbound-only call from the plugin to `https://data.vatsim.net/v3/vatsim
 Implements `RossCarlson.Vatsim.Vpilot.Plugins.IPlugin`. Responsibilities:
 
 1. **Event bridge** — subscribes to `IBroker` events (`NetworkConnected`, `NetworkDisconnected`, `RadioMessageReceived`, `PrivateMessageReceived`) and serializes each to JSON.
-2. **WebSocket host** — a `System.Net.HttpListener` bound to `localhost:9001` (configurable), upgraded per-connection to `WebSocket`. Broadcasts to all connected clients; no fan-out queue, so a slow client can block a broadcast tick (see [Known limitations](#known-limitations)).
+2. **WebSocket host** — a `System.Net.HttpListener` bound to `+:9001` (all interfaces, configurable), upgraded per-connection to `WebSocket`. Binding to anything other than `localhost` requires a URL ACL reservation or admin rights, which the installer configures automatically (see `installer/VPilotRemoteControl.iss`); without it, the plugin falls back to `localhost`-only and logs a warning. Broadcasts to all connected clients; no fan-out queue, so a slow client can block a broadcast tick (see [Known limitations](#known-limitations)).
 3. **Airspace watcher** — a timer polls VATSIM's data feed, computes great-circle distance (Haversine) from current aircraft position to each online controller's position, and estimates time-to-intercept from ground speed. Fires an `airspace_alert` event when ETA ≤ 5 minutes.
 4. **Command handler** — deserializes incoming client JSON (`{"action": "connect", ...}`) and calls the matching `IBroker` method.
 
