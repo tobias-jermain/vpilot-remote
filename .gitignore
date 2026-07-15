@@ -1,6 +1,7 @@
 # .NET / C#
 plugin/bin/
 plugin/obj/
+plugin/lib/
 *.user
 
 # Inno Setup output

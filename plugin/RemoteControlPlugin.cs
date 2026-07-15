@@ -61,8 +61,27 @@ namespace VPilotRemoteControl
             Task.Run(async () =>
             {
                 _httpListener = new HttpListener();
-                _httpListener.Prefixes.Add($"http://localhost:{WebSocketPort}/");
-                _httpListener.Start();
+                _httpListener.Prefixes.Add($"http://+:{WebSocketPort}/");
+
+                try
+                {
+                    _httpListener.Start();
+                }
+                catch (HttpListenerException)
+                {
+                    // Binding to all interfaces (needed so LAN devices can reach this)
+                    // requires either admin privileges or a URL ACL reservation — the
+                    // installer sets one up automatically. Without it, HttpListener
+                    // throws here. Fall back to loopback-only so local testing on this
+                    // same PC still works, rather than failing to start entirely.
+                    _broker.PostDebugMessage(
+                        $"{Name}: couldn't bind to all interfaces — LAN devices won't be able to connect. " +
+                        $"Run as admin once, or run 'netsh http add urlacl url=http://+:{WebSocketPort}/ user=Everyone' " +
+                        "(see CONTRIBUTING.md). Falling back to localhost-only.");
+                    _httpListener = new HttpListener();
+                    _httpListener.Prefixes.Add($"http://localhost:{WebSocketPort}/");
+                    _httpListener.Start();
+                }
 
                 while (!_cts.IsCancellationRequested)
                 {
@@ -141,18 +160,17 @@ namespace VPilotRemoteControl
                 switch (actionEl.GetString())
                 {
                     case "connect":
-                        var cid = root.GetProperty("cid").GetString();
-                        var password = root.GetProperty("password").GetString();
-                        var typeCode = root.TryGetProperty("typeCode", out var tc) ? tc.GetString() : "";
-                        // TODO: verify RequestConnect's exact signature against your
-                        // installed vPilot SDK version — this varies between releases.
-                        _broker.RequestConnect(cid, password, typeCode);
+                        var callsign = root.GetProperty("callsign").GetString();
+                        var typeCode = root.GetProperty("typeCode").GetString();
+                        var selcal = root.TryGetProperty("selcal", out var sc) ? sc.GetString() : null;
+                        // vPilot authenticates with VATSIM itself (CID/password live in
+                        // vPilot's own settings) — the plugin can only ask vPilot to go
+                        // online with a callsign/type/selcal. No credentials cross the wire.
+                        _broker.RequestConnect(callsign, typeCode, selcal);
                         break;
 
                     case "disconnect":
-                        // IBroker has no confirmed Disconnect() method as of writing.
-                        // See ARCHITECTURE.md known limitations — resolve in Session 2.
-                        _broker.PostDebugMessage("Disconnect requested via remote (unimplemented — see docs)");
+                        _broker.RequestDisconnect();
                         break;
 
                     default:

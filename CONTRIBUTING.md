@@ -11,15 +11,30 @@ Thanks for considering a contribution. This project is small and personal in ori
 
 **Plugin (Windows required — vPilot is Windows-only):**
 1. Install [.NET SDK](https://dotnet.microsoft.com/download) matching the target framework in `plugin/VPilotRemoteControl.csproj`.
-2. Install vPilot, locate `RossCarlson.Vatsim.Vpilot.Plugins.dll` in its install folder, and reference it from the `.csproj` (see comments in that file — it's not published to NuGet).
+2. Install vPilot, locate `RossCarlson.Vatsim.Vpilot.Plugins.dll` in its install folder (typically `%LOCALAPPDATA%\vPilot`), and copy it into `plugin/lib/` (git-ignored — see comments in the `.csproj`, it's not published to NuGet and isn't ours to redistribute).
 3. `dotnet build -c Debug` in `/plugin`, then copy the output DLL + XML into vPilot's `Plugins` folder to test live.
 4. Use `_broker.PostDebugMessage(...)` liberally — vPilot's debug console is your primary debugging tool since there's no interactive debugger attached to vPilot's process by default (attaching Visual Studio to the vPilot process works if you need breakpoints).
+5. To reach the plugin from another device on your LAN (not just this PC), `HttpListener` needs a URL ACL reservation, which the installer sets up automatically but a manual dev build doesn't. Run once, as admin:
+   ```
+   netsh http add urlacl url=http://+:9001/ user=Everyone
+   netsh advfirewall firewall add rule name="vPilot Remote Control" dir=in action=allow protocol=TCP localport=9001
+   ```
+   Without this, the plugin falls back to `localhost`-only and logs a warning — fine for same-PC testing, not for testing against the Swift app or `tools/test-client.html` from another machine.
 
 **App (Mac required — Xcode):**
 1. Open `apps/swift/VPilotRemote.xcodeproj`.
 2. Run the plugin locally first so there's a `ws://localhost:9001` to connect to.
 3. Both macOS and iOS targets share the `VPilotRemoteClient` WebSocket layer — keep protocol-handling code there rather than duplicating it per-platform.
 4. The `.xcodeproj` is generated from `apps/swift/project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`). If you add/remove/move a source file or change a build setting, edit `project.yml` and run `xcodegen generate` from `apps/swift/` rather than editing the project in Xcode's file inspector — otherwise your change won't survive the next regeneration, and CI regenerates from `project.yml` on every build.
+
+## CI setup (maintainer only)
+
+The `build-plugin`/`build-installer` CI jobs need `RossCarlson.Vatsim.Vpilot.Plugins.dll` too, and since it can't be committed, CI reads it from a repo secret instead:
+
+```bash
+base64 -w0 path/to/RossCarlson.Vatsim.Vpilot.Plugins.dll   # macOS: base64 -i ... (no -w0)
+```
+Add the output as a repository secret named `VPILOT_SDK_DLL_BASE64` (Settings → Secrets and variables → Actions). Without it, the plugin/installer CI jobs fail with a clear warning rather than silently reporting green.
 
 ## Branch naming
 

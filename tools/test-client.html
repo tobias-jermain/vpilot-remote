@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>vPilot Remote — test client</title>
+<style>
+  body { font: 14px/1.4 -apple-system, Segoe UI, sans-serif; margin: 0; padding: 16px; background: #111; color: #ddd; }
+  h1 { font-size: 16px; margin: 0 0 12px; }
+  .row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+  input { background: #222; border: 1px solid #444; color: #eee; padding: 6px 8px; border-radius: 4px; }
+  button { background: #2d5; border: none; color: #002; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+  button.secondary { background: #444; color: #eee; }
+  button:disabled { opacity: .4; cursor: default; }
+  #status { padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+  #status.disconnected { background: #522; }
+  #status.connecting { background: #654; }
+  #status.open { background: #262; }
+  #log { background: #000; border: 1px solid #333; border-radius: 4px; padding: 8px; height: 60vh; overflow-y: auto; white-space: pre-wrap; font: 12px/1.5 ui-monospace, monospace; }
+  .evt { border-bottom: 1px solid #222; padding: 4px 0; }
+  .evt .type { color: #7cf; font-weight: 600; }
+  .evt .ts { color: #666; float: right; }
+  fieldset { border: 1px solid #333; border-radius: 4px; margin-bottom: 12px; }
+  legend { color: #999; font-size: 12px; padding: 0 4px; }
+</style>
+</head>
+<body>
+  <h1>vPilot Remote — test client <span id="status" class="disconnected">disconnected</span></h1>
+
+  <fieldset>
+    <legend>Plugin server</legend>
+    <div class="row">
+      <input id="host" placeholder="PC's LAN IP, e.g. 192.168.1.100" size="24">
+      <input id="port" placeholder="port" value="9001" size="6">
+      <button id="connectBtn">Connect</button>
+      <button id="disconnectBtn" class="secondary" disabled>Close socket</button>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Remote commands (Session 2)</legend>
+    <div class="row">
+      <input id="callsign" placeholder="Callsign, e.g. BAW123" size="12">
+      <input id="typeCode" placeholder="Type, e.g. B738" size="8">
+      <input id="selcal" placeholder="SELCAL (optional)" size="10">
+      <button id="sendConnect" class="secondary" disabled>Send connect</button>
+      <button id="sendDisconnect" class="secondary" disabled>Send disconnect</button>
+    </div>
+  </fieldset>
+
+  <div id="log"></div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const statusEl = $('status');
+  const logEl = $('log');
+  let ws = null;
+
+  // Remember the last host/port used, purely for convenience across reloads.
+  $('host').value = localStorage.getItem('vpr_host') || '';
+  $('port').value = localStorage.getItem('vpr_port') || '9001';
+
+  function setStatus(text, cls) {
+    statusEl.textContent = text;
+    statusEl.className = cls;
+  }
+
+  function log(line, isRaw) {
+    const div = document.createElement('div');
+    div.className = 'evt';
+    div.textContent = line;
+    logEl.prepend(div);
+  }
+
+  function logEvent(obj) {
+    const div = document.createElement('div');
+    div.className = 'evt';
+    const ts = obj.timestamp ? new Date(obj.timestamp).toLocaleTimeString() : '';
+    div.innerHTML = `<span class="ts">${ts}</span><span class="type">${obj.type || 'unknown'}</span> ${JSON.stringify(obj)}`;
+    logEl.prepend(div);
+  }
+
+  $('connectBtn').addEventListener('click', () => {
+    const host = $('host').value.trim();
+    const port = $('port').value.trim() || '9001';
+    if (!host) { alert('Enter the PC\'s LAN IP first.'); return; }
+    localStorage.setItem('vpr_host', host);
+    localStorage.setItem('vpr_port', port);
+
+    setStatus('connecting', 'connecting');
+    ws = new WebSocket(`ws://${host}:${port}`);
+
+    ws.onopen = () => {
+      setStatus('open', 'open');
+      $('disconnectBtn').disabled = false;
+      $('sendConnect').disabled = false;
+      $('sendDisconnect').disabled = false;
+      log('-- socket open --');
+    };
+    ws.onclose = () => {
+      setStatus('disconnected', 'disconnected');
+      $('disconnectBtn').disabled = true;
+      $('sendConnect').disabled = true;
+      $('sendDisconnect').disabled = true;
+      log('-- socket closed --');
+    };
+    ws.onerror = (e) => log('-- socket error, see browser console --');
+    ws.onmessage = (e) => {
+      try { logEvent(JSON.parse(e.data)); }
+      catch { log(e.data); }
+    };
+  });
+
+  $('disconnectBtn').addEventListener('click', () => ws && ws.close());
+
+  $('sendConnect').addEventListener('click', () => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    const callsign = $('callsign').value.trim();
+    const typeCode = $('typeCode').value.trim();
+    const selcal = $('selcal').value.trim() || null;
+    if (!callsign || !typeCode) { alert('Callsign and aircraft type are required.'); return; }
+    const cmd = { action: 'connect', callsign, typeCode, selcal };
+    ws.send(JSON.stringify(cmd));
+    log('-> sent ' + JSON.stringify(cmd));
+  });
+
+  $('sendDisconnect').addEventListener('click', () => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    ws.send(JSON.stringify({ action: 'disconnect' }));
+    log('-> sent {"action":"disconnect"}');
+  });
+</script>
+</body>
+</html>

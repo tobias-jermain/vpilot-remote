@@ -2,28 +2,33 @@ import SwiftUI
 
 struct ConnectSheet: View {
     @Environment(\.dismiss) private var dismiss
-    var onConnect: (String, String, String) -> Void
+    var onConnect: (String, String, String?) -> Void
 
-    @State private var cid: String = ""
-    @State private var password: String = ""
+    @State private var callsign: String = ""
     @State private var typeCode: String = ""
+    @State private var selcal: String = ""
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("CID", text: $cid)
+                    TextField("Callsign (e.g. BAW123)", text: $callsign)
                         #if os(iOS)
-                        .keyboardType(.numberPad)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.characters)
                         #endif
-                    SecureField("Password", text: $password)
                     TextField("Aircraft type (e.g. B738)", text: $typeCode)
                         #if os(iOS)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.characters)
                         #endif
+                    TextField("SELCAL (optional)", text: $selcal)
+                        #if os(iOS)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.characters)
+                        #endif
                 } footer: {
-                    Text("Sent to the plugin over your LAN, which passes it to vPilot's own connect method. This is plaintext on ws:// — see ARCHITECTURE.md's security model before using this off your LAN.")
+                    Text("You must already be signed in to vPilot with your CID/password — this only asks vPilot to go online with this callsign. No credentials cross the network.")
                 }
             }
             .navigationTitle("Connect to VATSIM")
@@ -36,10 +41,15 @@ struct ConnectSheet: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Connect") {
-                        onConnect(cid.trimmingCharacters(in: .whitespaces), password, typeCode.trimmingCharacters(in: .whitespaces))
+                        let trimmedSelcal = selcal.trimmingCharacters(in: .whitespaces)
+                        onConnect(
+                            callsign.trimmingCharacters(in: .whitespaces),
+                            typeCode.trimmingCharacters(in: .whitespaces),
+                            trimmedSelcal.isEmpty ? nil : trimmedSelcal
+                        )
                         dismiss()
                     }
-                    .disabled(cid.isEmpty || password.isEmpty || typeCode.isEmpty)
+                    .disabled(callsign.isEmpty || typeCode.isEmpty)
                 }
             }
         }

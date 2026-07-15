@@ -35,9 +35,10 @@ vPilot (IBroker events) → Plugin → WebSocket server (localhost:9001) → Mac
 ### Plugin (Windows, where vPilot runs)
 
 1. Download `VPilotRemoteControl-Setup.exe` from [Releases](../../releases).
-2. Run it — it installs directly to `%LOCALAPPDATA%\vPilot\Plugins`.
-3. Restart vPilot. Check the debug console for `vPilot Remote Control initialized`.
-4. Note the IP address of the PC (`ipconfig` → IPv4 address) — you'll need this in the app.
+2. Run it — it installs directly to `%LOCALAPPDATA%\vPilot\Plugins`, no admin rights needed.
+3. When prompted, click **Yes** to let it open LAN access to port 9001 (a URL reservation + firewall rule) — this needs one Windows admin confirmation. Skip it if you'll only ever connect from this same PC.
+4. Restart vPilot. Check the debug console for `vPilot Remote Control initialized`.
+5. Note the IP address of the PC (`ipconfig` → IPv4 address) — you'll need this in the app.
 
 ### Companion App (Mac/iOS)
 
@@ -68,10 +69,19 @@ cd apps/swift
 open VPilotRemote.xcodeproj
 ```
 
+## Testing without Xcode
+
+`tools/test-client.html` is a dependency-free WebSocket test client — open it in any browser on another device on your LAN, point it at the PC's IP and port 9001, and you'll see every plugin event live, plus buttons to send `connect`/`disconnect` commands. Useful for verifying the plugin works before touching the Swift app at all.
+
+VATSIM only allows one connection per CID, so you can't send yourself a private message from a second client. To generate real events solo:
+- **Connection state**: just connect/disconnect vPilot (observer mode is fine) — `state_change` needs no other party.
+- **Radio messages**: tune to any frequency with a currently-online controller (check [VATSpy](https://vatspy.net) or the [VATSIM data feed](https://data.vatsim.net/v3/vatsim-data.json) for who's online) — any transmission on that frequency fires `RadioMessageReceived` for everyone tuned in, whether or not it's addressed to you.
+- **Private messages**: ask a friend, or in the VATSIM Discord's ATC/pilot practice channels, for a one-line test message to your callsign.
+
 ## Data & privacy
 
 - No data leaves your LAN except calls to the public VATSIM Data API (your position is never sent anywhere but stays local — only used to compute distance client-side).
-- No credentials are stored by the plugin; connect commands pass your CID/password through to vPilot's own `RequestConnect` method over your local network only. See [ARCHITECTURE.md](ARCHITECTURE.md#security-model) for the security model and its current limitations before using this over WAN.
+- No credentials ever leave vPilot: it authenticates with VATSIM itself, and the plugin can only ask an already-signed-in vPilot to go online with a callsign/type/SELCAL over your local network. See [ARCHITECTURE.md](ARCHITECTURE.md#security-model) for the security model and its current limitations before using this over WAN.
 
 ## License
 
