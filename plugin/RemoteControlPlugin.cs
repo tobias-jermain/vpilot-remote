@@ -141,18 +141,17 @@ namespace VPilotRemoteControl
                 switch (actionEl.GetString())
                 {
                     case "connect":
-                        var cid = root.GetProperty("cid").GetString();
-                        var password = root.GetProperty("password").GetString();
-                        var typeCode = root.TryGetProperty("typeCode", out var tc) ? tc.GetString() : "";
-                        // TODO: verify RequestConnect's exact signature against your
-                        // installed vPilot SDK version — this varies between releases.
-                        _broker.RequestConnect(cid, password, typeCode);
+                        var callsign = root.GetProperty("callsign").GetString();
+                        var typeCode = root.GetProperty("typeCode").GetString();
+                        var selcal = root.TryGetProperty("selcal", out var sc) ? sc.GetString() : null;
+                        // vPilot authenticates with VATSIM itself (CID/password live in
+                        // vPilot's own settings) — the plugin can only ask vPilot to go
+                        // online with a callsign/type/selcal. No credentials cross the wire.
+                        _broker.RequestConnect(callsign, typeCode, selcal);
                         break;
 
                     case "disconnect":
-                        // IBroker has no confirmed Disconnect() method as of writing.
-                        // See ARCHITECTURE.md known limitations — resolve in Session 2.
-                        _broker.PostDebugMessage("Disconnect requested via remote (unimplemented — see docs)");
+                        _broker.RequestDisconnect();
                         break;
 
                     default:

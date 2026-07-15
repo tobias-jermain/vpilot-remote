@@ -99,9 +99,9 @@ enum FeedItem: Identifiable {
 
 struct ConnectCommand: Encodable {
     let action = "connect"
-    let cid: String
-    let password: String
+    let callsign: String
     let typeCode: String
+    let selcal: String?
 }
 
 struct DisconnectCommand: Encodable {

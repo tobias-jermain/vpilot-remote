@@ -18,28 +18,36 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      # NOTE: RossCarlson.Vatsim.Vpilot.Plugins.dll is not published to NuGet
-      # and isn't committed to this repo (see CONTRIBUTING.md). CI restores it
-      # from a private cache/secret in real deployment — as a placeholder,
-      # this step is a no-op until that's set up. Contributors: see issue
-      # tracker for "CI: restore vPilot SDK DLL" before this job will pass.
-      - name: Restore vPilot plugin SDK (placeholder)
-        run: echo "TODO — see CONTRIBUTING.md for local build instructions until this is automated"
+      # RossCarlson.Vatsim.Vpilot.Plugins.dll is not published to NuGet and is
+      # not committed to this repo (it's Ross Carlson's, not ours to
+      # redistribute — see CONTRIBUTING.md). The repo owner base64-encodes
+      # their local copy and stores it as the VPILOT_SDK_DLL_BASE64 repo
+      # secret; CI decodes it here before building. Forked-repo PRs don't
+      # get repo secrets (GitHub's default), so this step — and the build
+      # below — will legitimately fail for external contributors until they
+      # test locally per CONTRIBUTING.md.
+      - name: Restore vPilot plugin SDK
+        shell: bash
+        env:
+          VPILOT_SDK_DLL_BASE64: ${{ secrets.VPILOT_SDK_DLL_BASE64 }}
+        run: |
+          mkdir -p plugin/lib
+          if [ -n "$VPILOT_SDK_DLL_BASE64" ]; then
+            echo "$VPILOT_SDK_DLL_BASE64" | base64 --decode > plugin/lib/RossCarlson.Vatsim.Vpilot.Plugins.dll
+          else
+            echo "::warning::VPILOT_SDK_DLL_BASE64 secret not set — plugin build will fail. See CONTRIBUTING.md."
+          fi
 
       - name: Build plugin
         run: dotnet build plugin/VPilotRemoteControl.csproj -c Release
-        continue-on-error: true # remove once the SDK restore step above is real
 
       # Cross-job filesystem isn't shared, so the installer job (which may run
-      # on a different runner) needs this passed explicitly. if-no-files-found
-      # is set to ignore since the build above is allowed to fail/produce
-      # nothing until the SDK restore step is real.
+      # on a different runner) needs this passed explicitly.
       - name: Upload plugin build output
         uses: actions/upload-artifact@v4
         with:
           name: plugin-build
           path: plugin/bin/Release/net472/
-          if-no-files-found: ignore
 
   build-installer:
     runs-on: windows-latest
@@ -59,16 +67,12 @@ jobs:
 
       - name: Build installer
         run: iscc installer\VPilotRemoteControl.iss
-        # Same placeholder situation as build-plugin: this needs the DLL from
-        # the step above, which is a no-op until the SDK restore is real.
-        continue-on-error: true
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
           name: installer
           path: installer/dist/*.exe
-          if-no-files-found: ignore
 
   build-swift-app:
     runs-on: macos-15

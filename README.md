@@ -68,10 +68,14 @@ cd apps/swift
 open VPilotRemote.xcodeproj
 ```
 
+## Testing without Xcode
+
+`tools/test-client.html` is a dependency-free WebSocket test client — open it in any browser on another device on your LAN, point it at the PC's IP and port 9001, and you'll see every plugin event live, plus buttons to send `connect`/`disconnect` commands. Useful for verifying the plugin works before touching the Swift app at all.
+
 ## Data & privacy
 
 - No data leaves your LAN except calls to the public VATSIM Data API (your position is never sent anywhere but stays local — only used to compute distance client-side).
-- No credentials are stored by the plugin; connect commands pass your CID/password through to vPilot's own `RequestConnect` method over your local network only. See [ARCHITECTURE.md](ARCHITECTURE.md#security-model) for the security model and its current limitations before using this over WAN.
+- No credentials ever leave vPilot: it authenticates with VATSIM itself, and the plugin can only ask an already-signed-in vPilot to go online with a callsign/type/SELCAL over your local network. See [ARCHITECTURE.md](ARCHITECTURE.md#security-model) for the security model and its current limitations before using this over WAN.
 
 ## License
 

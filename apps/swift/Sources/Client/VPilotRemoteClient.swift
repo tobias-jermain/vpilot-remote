@@ -146,8 +146,8 @@ final class VPilotRemoteClient: NSObject, ObservableObject {
 
     // MARK: - Outbound commands
 
-    func sendConnectCommand(cid: String, password: String, typeCode: String) {
-        send(ConnectCommand(cid: cid, password: password, typeCode: typeCode))
+    func sendConnectCommand(callsign: String, typeCode: String, selcal: String?) {
+        send(ConnectCommand(callsign: callsign, typeCode: typeCode, selcal: selcal))
     }
 
     func sendDisconnectCommand() {

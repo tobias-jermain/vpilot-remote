@@ -14,15 +14,15 @@
 
   <ItemGroup>
     <!--
-      RossCarlson.Vatsim.Vpilot.Plugins.dll is NOT published to NuGet.
-      Copy it (and its .xml docs file) from your vPilot install folder into
-      a local `lib/` directory here, then uncomment the reference below.
-      Do not commit the DLL itself to the repo — it's Ross Carlson's,
-      not part of this project's license. See CONTRIBUTING.md.
+      RossCarlson.Vatsim.Vpilot.Plugins.dll is NOT published to NuGet and is
+      NOT committed to this repo — it's Ross Carlson's, not part of this
+      project's license. Copy it from your vPilot install folder into
+      plugin/lib/ before building locally (see CONTRIBUTING.md). CI restores
+      it from a repository secret instead of a committed file.
     -->
-    <!-- <Reference Include="RossCarlson.Vatsim.Vpilot.Plugins">
+    <Reference Include="RossCarlson.Vatsim.Vpilot.Plugins">
       <HintPath>lib\RossCarlson.Vatsim.Vpilot.Plugins.dll</HintPath>
-    </Reference> -->
+    </Reference>
   </ItemGroup>
 
 </Project>

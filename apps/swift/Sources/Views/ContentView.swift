@@ -56,8 +56,8 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showingConnectSheet) {
-            ConnectSheet { cid, password, typeCode in
-                client.sendConnectCommand(cid: cid, password: password, typeCode: typeCode)
+            ConnectSheet { callsign, typeCode, selcal in
+                client.sendConnectCommand(callsign: callsign, typeCode: typeCode, selcal: selcal)
             }
         }
         .onAppear {
