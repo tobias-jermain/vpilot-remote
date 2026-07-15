@@ -25,4 +25,16 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- net472's default framework reference set doesn't include these —
+         HttpClient/WebSocket types live in System.Net.Http on .NET Framework. -->
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- System.Text.Json ships in the BCL on .NET Core/5+ but not on .NET
+         Framework, so net472 needs it as an explicit package. -->
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
 </Project>
