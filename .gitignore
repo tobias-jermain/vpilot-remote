@@ -1,0 +1,25 @@
+# .NET / C#
+plugin/bin/
+plugin/obj/
+*.user
+
+# Inno Setup output
+installer/dist/
+installer/*.exe
+
+# Xcode / Swift
+apps/swift/build/
+apps/swift/DerivedData/
+apps/swift/*.xcodeproj/xcuserdata/
+apps/swift/*.xcodeproj/project.xcworkspace/xcuserdata/
+apps/swift/.swiftpm/
+*.xcuserstate
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vs/
+.vscode/
+*.swp

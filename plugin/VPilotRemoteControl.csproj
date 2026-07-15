@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- vPilot's plugin host targets .NET Framework, not .NET Core/5+.
+         Confirm this against the framework of RossCarlson.Vatsim.Vpilot.Plugins.dll
+         in your installed vPilot version before building for release. -->
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>VPilotRemoteControl</AssemblyName>
+    <RootNamespace>VPilotRemoteControl</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <Platforms>x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      RossCarlson.Vatsim.Vpilot.Plugins.dll is NOT published to NuGet.
+      Copy it (and its .xml docs file) from your vPilot install folder into
+      a local `lib/` directory here, then uncomment the reference below.
+      Do not commit the DLL itself to the repo — it's Ross Carlson's,
+      not part of this project's license. See CONTRIBUTING.md.
+    -->
+    <!-- <Reference Include="RossCarlson.Vatsim.Vpilot.Plugins">
+      <HintPath>lib\RossCarlson.Vatsim.Vpilot.Plugins.dll</HintPath>
+    </Reference> -->
+  </ItemGroup>
+
+</Project>

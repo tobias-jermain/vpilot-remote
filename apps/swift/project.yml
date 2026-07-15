@@ -1,0 +1,85 @@
+name: VPilotRemote
+options:
+  bundleIdPrefix: com.vpilotremote
+  deploymentTarget:
+    iOS: "16.0"
+    macOS: "13.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  VPilotRemote-iOS:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.vpilotremote.ios
+        PRODUCT_NAME: VPilotRemote
+        TARGETED_DEVICE_FAMILY: "1,2"
+    info:
+      path: Generated/iOS-Info.plist
+      properties:
+        CFBundleDisplayName: VPilot Remote
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSLocalNetworkUsageDescription: "vPilot Remote connects to the plugin running on your PC over your local Wi-Fi network to receive live notifications."
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+
+  VPilotRemote-macOS:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.vpilotremote.mac
+        PRODUCT_NAME: VPilotRemote
+        COMBINE_HIDPI_IMAGES: YES
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_IDENTITY: "-"
+    info:
+      path: Generated/macOS-Info.plist
+      properties:
+        CFBundleDisplayName: VPilot Remote
+        LSApplicationCategoryType: public.app-category.utilities
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    entitlements:
+      path: Generated/macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.network.client: true
+
+schemes:
+  VPilotRemote-iOS:
+    build:
+      targets:
+        VPilotRemote-iOS: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+  VPilotRemote-macOS:
+    build:
+      targets:
+        VPilotRemote-macOS: all
+    run:
+      config: Debug
+    archive:
+      config: Release

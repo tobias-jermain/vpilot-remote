@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0AE21ABD014507689AD6114A /* FeedRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFED3134224A613AEFDA303 /* FeedRow.swift */; };
+		2AA5DAAF1432D3116D18CC9F /* ConnectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83831E064CD3C84576FAADBD /* ConnectSheet.swift */; };
+		63817A32546B5485FA24060F /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A4253E91374811347AC92 /* SettingsSheet.swift */; };
+		6C02AA179B9C5F717E33AE06 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5573D158BD25434B717830EB /* Protocol.swift */; };
+		895656F9291E7D480F6F110D /* VPilotRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519AAF4BD2557C1A53B819E /* VPilotRemoteApp.swift */; };
+		8D3AA3FDF91D162671682711 /* VPilotRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519AAF4BD2557C1A53B819E /* VPilotRemoteApp.swift */; };
+		90D6CC294F0275A59BF6030B /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A4253E91374811347AC92 /* SettingsSheet.swift */; };
+		B95EBD37E33FE04D297D055E /* FeedRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFED3134224A613AEFDA303 /* FeedRow.swift */; };
+		BB6B2F298B06F7C104D701AE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E4E9DC5806E39802203C3 /* NotificationManager.swift */; };
+		C0B02A7E26E3D53E5EA4946C /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E4E9DC5806E39802203C3 /* NotificationManager.swift */; };
+		C53CCF6B5A83CA40040189CB /* ConnectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83831E064CD3C84576FAADBD /* ConnectSheet.swift */; };
+		C7DCC16FD2D48DC264279CEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE4FDD44335BBE11FF12C1 /* ContentView.swift */; };
+		D0AE5BCC98D52A6A82564FE9 /* VPilotRemoteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850A1EAA692F859C98B00EC2 /* VPilotRemoteClient.swift */; };
+		ED40178973A1157FABCF2FCD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE4FDD44335BBE11FF12C1 /* ContentView.swift */; };
+		FB7776A618052C1118DDCA0E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5573D158BD25434B717830EB /* Protocol.swift */; };
+		FD02BB81DD82AE36A2F67C67 /* VPilotRemoteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850A1EAA692F859C98B00EC2 /* VPilotRemoteClient.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5573D158BD25434B717830EB /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		67C6F1F489D0C67DDE88111A /* VPilotRemote-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "VPilotRemote-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83831E064CD3C84576FAADBD /* ConnectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSheet.swift; sourceTree = "<group>"; };
+		850A1EAA692F859C98B00EC2 /* VPilotRemoteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPilotRemoteClient.swift; sourceTree = "<group>"; };
+		A543DAE2F68BDE624FE9EB65 /* VPilotRemote-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VPilotRemote-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D519AAF4BD2557C1A53B819E /* VPilotRemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPilotRemoteApp.swift; sourceTree = "<group>"; };
+		E81E4E9DC5806E39802203C3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		EDAE4FDD44335BBE11FF12C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EDFED3134224A613AEFDA303 /* FeedRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRow.swift; sourceTree = "<group>"; };
+		FA3A4253E91374811347AC92 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1E7A571014249B30012D4F12 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				850A1EAA692F859C98B00EC2 /* VPilotRemoteClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		383B140D5DFEAF621274AD8B /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				E81E4E9DC5806E39802203C3 /* NotificationManager.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		5D55E4BBE0F9CE38925DD00B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67C6F1F489D0C67DDE88111A /* VPilotRemote-iOS.app */,
+				A543DAE2F68BDE624FE9EB65 /* VPilotRemote-macOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5DAC09D4905EAFBC07D5BD98 = {
+			isa = PBXGroup;
+			children = (
+				ED643B46E865A59242BAD43D /* Sources */,
+				5D55E4BBE0F9CE38925DD00B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7CEB5B24BDB5E2B69A9FA6E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83831E064CD3C84576FAADBD /* ConnectSheet.swift */,
+				EDAE4FDD44335BBE11FF12C1 /* ContentView.swift */,
+				EDFED3134224A613AEFDA303 /* FeedRow.swift */,
+				FA3A4253E91374811347AC92 /* SettingsSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C034FF726C0A7D2778E754A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5573D158BD25434B717830EB /* Protocol.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E863FE40EE1B53D7EAFD94B0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D519AAF4BD2557C1A53B819E /* VPilotRemoteApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ED643B46E865A59242BAD43D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E863FE40EE1B53D7EAFD94B0 /* App */,
+				1E7A571014249B30012D4F12 /* Client */,
+				C034FF726C0A7D2778E754A9 /* Models */,
+				383B140D5DFEAF621274AD8B /* Notifications */,
+				7CEB5B24BDB5E2B69A9FA6E5 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3860BB1598F97209B88D9B0B /* VPilotRemote-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F8F5FF8036C2F1F4DDF9A88 /* Build configuration list for PBXNativeTarget "VPilotRemote-macOS" */;
+			buildPhases = (
+				4B9FC33056195D40B515C2CA /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VPilotRemote-macOS";
+			packageProductDependencies = (
+			);
+			productName = "VPilotRemote-macOS";
+			productReference = A543DAE2F68BDE624FE9EB65 /* VPilotRemote-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9AAA54F24FA2843B25E517E5 /* VPilotRemote-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FA7D8F08B68A601C4C607CA /* Build configuration list for PBXNativeTarget "VPilotRemote-iOS" */;
+			buildPhases = (
+				91C10DE3260D177BCD674139 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VPilotRemote-iOS";
+			packageProductDependencies = (
+			);
+			productName = "VPilotRemote-iOS";
+			productReference = 67C6F1F489D0C67DDE88111A /* VPilotRemote-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0773BB851051E47714A93AF0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3860BB1598F97209B88D9B0B = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					9AAA54F24FA2843B25E517E5 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = AAEE94DD7A0C539E870EC67B /* Build configuration list for PBXProject "VPilotRemote" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 5DAC09D4905EAFBC07D5BD98;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5D55E4BBE0F9CE38925DD00B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9AAA54F24FA2843B25E517E5 /* VPilotRemote-iOS */,
+				3860BB1598F97209B88D9B0B /* VPilotRemote-macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B9FC33056195D40B515C2CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C53CCF6B5A83CA40040189CB /* ConnectSheet.swift in Sources */,
+				C7DCC16FD2D48DC264279CEA /* ContentView.swift in Sources */,
+				0AE21ABD014507689AD6114A /* FeedRow.swift in Sources */,
+				C0B02A7E26E3D53E5EA4946C /* NotificationManager.swift in Sources */,
+				FB7776A618052C1118DDCA0E /* Protocol.swift in Sources */,
+				63817A32546B5485FA24060F /* SettingsSheet.swift in Sources */,
+				8D3AA3FDF91D162671682711 /* VPilotRemoteApp.swift in Sources */,
+				D0AE5BCC98D52A6A82564FE9 /* VPilotRemoteClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91C10DE3260D177BCD674139 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AA5DAAF1432D3116D18CC9F /* ConnectSheet.swift in Sources */,
+				ED40178973A1157FABCF2FCD /* ContentView.swift in Sources */,
+				B95EBD37E33FE04D297D055E /* FeedRow.swift in Sources */,
+				BB6B2F298B06F7C104D701AE /* NotificationManager.swift in Sources */,
+				6C02AA179B9C5F717E33AE06 /* Protocol.swift in Sources */,
+				90D6CC294F0275A59BF6030B /* SettingsSheet.swift in Sources */,
+				895656F9291E7D480F6F110D /* VPilotRemoteApp.swift in Sources */,
+				FD02BB81DD82AE36A2F67C67 /* VPilotRemoteClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0C31C2F2B9C6B7DA45ED2CCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Generated/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Generated/macOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vpilotremote.mac;
+				PRODUCT_NAME = VPilotRemote;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		986D603ADAD1DCEFB525107D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Generated/iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vpilotremote.ios;
+				PRODUCT_NAME = VPilotRemote;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9ECA64E509308EE456DB5027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Generated/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Generated/macOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vpilotremote.mac;
+				PRODUCT_NAME = VPilotRemote;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A29F58EE85DD900794585DC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DE47C1E638B3EB3F099CB06A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Generated/iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vpilotremote.ios;
+				PRODUCT_NAME = VPilotRemote;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F61A38CB39CCD24EBFBC704F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F8F5FF8036C2F1F4DDF9A88 /* Build configuration list for PBXNativeTarget "VPilotRemote-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C31C2F2B9C6B7DA45ED2CCF /* Debug */,
+				9ECA64E509308EE456DB5027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6FA7D8F08B68A601C4C607CA /* Build configuration list for PBXNativeTarget "VPilotRemote-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				986D603ADAD1DCEFB525107D /* Debug */,
+				DE47C1E638B3EB3F099CB06A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AAEE94DD7A0C539E870EC67B /* Build configuration list for PBXProject "VPilotRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A29F58EE85DD900794585DC0 /* Debug */,
+				F61A38CB39CCD24EBFBC704F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0773BB851051E47714A93AF0 /* Project object */;
+}
