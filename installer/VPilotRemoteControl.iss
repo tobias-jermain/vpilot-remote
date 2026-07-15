@@ -5,7 +5,7 @@
 #define MyAppName "vPilot Remote Control"
 #define MyAppVersion "0.1.0"
 #define MyAppPublisher "vPilot Remote Control Contributors"
-#define MyAppURL "https://github.com/YOUR_USERNAME/vpilot-remote"
+#define MyAppURL "https://github.com/tobias-jermain/vpilot-remote"
 
 [Setup]
 AppId={{B4E2A1C0-9F3D-4E5A-8B7C-1234567890AB}
